@@ -4,9 +4,9 @@ Este es un proyecto base para iniciar un proyecto con Laravel 10, Vue 3, Vue Rou
 
 ## Requisitos
 
-- PHP 8.1.0 o superior
-- Composer 2.2.0 o superior
-- Node 18.0 o superior
+-   PHP 8.1.0 o superior
+-   Composer 2.2.0 o superior
+-   Node 18.0 o superior
 
 ## Instalación
 
@@ -26,3 +26,7 @@ Este es un proyecto base para iniciar un proyecto con Laravel 10, Vue 3, Vue Rou
 ## Compilación para producción
 
 1. Ejecutar `npm run build`
+
+## Apuntes de desarrollo
+
+1. Utilizacion de `vue` con `vite` instalar complemento con `npm install --save-dev @vitejs/plugin-vue`
