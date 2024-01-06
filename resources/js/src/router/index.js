@@ -6,4 +6,12 @@ const router = new createRouter({
     routes,
 });
 
+router.afterEach(() => {
+    const $appSpinner = document.getElementById("app-loading");
+
+    if ($appSpinner) {
+        $appSpinner.style.display = "none";
+    }
+});
+
 export default router;
