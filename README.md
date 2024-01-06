@@ -27,6 +27,11 @@ Este es un proyecto base para iniciar un proyecto con Laravel 10, Vue 3, Vue Rou
 
 1. Ejecutar `npm run build`
 
+## Linting y Formateo
+
+1. Ejecutar `npm run lint` para ejecutar el linting con `eslint`
+2. Ejecutar `npm run format` para ejecutar el formateo con `prettier`
+
 ## Apuntes de desarrollo
 
 1. Utilizacion de `vue` con `vite` instalar complemento con `npm install --save-dev @vitejs/plugin-vue`

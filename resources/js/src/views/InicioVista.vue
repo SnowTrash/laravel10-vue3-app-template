@@ -1,5 +1,5 @@
 <script setup>
-import { useContadorStore } from '@/stores/contador';
+import { useContadorStore } from "@/stores/contador";
 
 const contadorStore = useContadorStore();
 

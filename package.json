@@ -3,12 +3,18 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "lint": "eslint --ext .js,.vue resources/js",
+        "format": "prettier --write resources"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.0.2",
         "axios": "^1.6.1",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-vue": "^9.19.2",
         "laravel-vite-plugin": "^1.0.0",
+        "prettier": "^3.1.1",
         "vite": "^5.0.0",
         "vite-plugin-vuetify": "^2.0.1"
     },
