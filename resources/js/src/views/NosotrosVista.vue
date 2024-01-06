@@ -9,5 +9,5 @@ const { decrementar } = contadorStore;
 <template>
     <h2>Nosotros</h2>
 
-    <button @click="decrementar">Decrementar</button>
+    <v-btn color="red" @click="decrementar">Decrementar</v-btn>
 </template>

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
+import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineConfig({
     plugins: [
@@ -12,8 +13,10 @@ export default defineConfig({
             template: {
                 base: null,
                 includeAbsolute: false,
+                transformAssetUrls,
             },
         }),
+        Vuetify(),
     ],
     resolve: {
         alias: {
