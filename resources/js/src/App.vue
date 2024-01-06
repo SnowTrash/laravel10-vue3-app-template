@@ -28,7 +28,7 @@ const { contadorGetter } = storeToRefs(contadorStore);
                         <router-link to="/nosotros">Nosotros</router-link>
                     </p>
 
-                    <router-view></router-view>
+                    <router-view />
                 </v-responsive>
             </v-container>
         </v-main>
