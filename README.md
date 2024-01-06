@@ -1,6 +1,6 @@
-# Laravel 10 + Vue 3 + Vue Router 4 + Vuex 4 + Vuetify 3
+# Laravel 10 + Vue 3 + Vue Router 4 + Pinia 2 + Vuetify 3
 
-Este es un proyecto base para iniciar un proyecto con Laravel 10, Vue 3, Vue Router 4, Vuex 4 y Vuetify 3.
+Este es un proyecto base para iniciar un proyecto con Laravel 10, Vue 3, Vue Router 4, Pinia 2 y Vuetify 3.
 
 ## Requisitos
 
