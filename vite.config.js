@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
     plugins: [
@@ -20,7 +21,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            "@": "/resources/js/src",
+            "@": fileURLToPath(new URL("./resources/js/src", import.meta.url)),
         },
+        extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
     },
 });
