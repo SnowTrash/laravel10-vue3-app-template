@@ -13,22 +13,6 @@ const { drawer } = storeToRefs(theNavigationDrawer);
 
             <v-divider />
 
-            <v-list-item link :to="{ name: 'inicio' }">
-                <template #prepend>
-                    <v-icon icon="mdi-home" />
-                </template>
-
-                <v-list-item-title> Inicio </v-list-item-title>
-            </v-list-item>
-
-            <v-list-item link :to="{ name: 'nosotros' }">
-                <template #prepend>
-                    <v-icon icon="mdi-account-group" />
-                </template>
-
-                <v-list-item-title> Nosotros </v-list-item-title>
-            </v-list-item>
-
             <v-list-item link :to="{ name: 'admin.dashboard' }">
                 <template #prepend>
                     <v-icon icon="mdi-view-dashboard" />

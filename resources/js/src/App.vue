@@ -1,12 +1,22 @@
 <script setup>
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import BlankLayout from "@/layouts/BlankLayout.vue";
+import PageLayout from "./layouts/PageLayout.vue";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 const route = useRoute();
 const layout = computed(() => {
-    return route.meta.layout == "admin-layout" ? AdminLayout : BlankLayout;
+    switch (route.meta.layout) {
+        case "admin-layout":
+            return AdminLayout;
+        case "page-layout":
+            return PageLayout;
+        case "blank-layout":
+            return BlankLayout;
+        default:
+            return BlankLayout;
+    }
 });
 </script>
 
