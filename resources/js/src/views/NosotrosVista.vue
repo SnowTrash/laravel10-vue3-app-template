@@ -16,6 +16,12 @@ const { contadorGetter } = storeToRefs(contadorStore);
             <v-btn color="red" @click="decrementar">
                 Decrementar ({{ contadorGetter }})
             </v-btn>
+
+            <p>
+                <router-link :to="{ name: 'admin.dashboard' }">
+                    Ir al dashboard
+                </router-link>
+            </p>
         </v-col>
     </v-row>
 </template>

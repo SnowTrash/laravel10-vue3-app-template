@@ -16,6 +16,12 @@ const { contadorGetter } = storeToRefs(contadorStore);
             <v-btn color="green" @click="incrementar">
                 Incrementar ({{ contadorGetter }})
             </v-btn>
+
+            <p>
+                <router-link :to="{ name: 'admin.dashboard' }">
+                    Ir al dashboard
+                </router-link>
+            </p>
         </v-col>
     </v-row>
 </template>
