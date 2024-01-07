@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, toRefs } from "vue";
 
 const props = defineProps({
     navRoute: {
@@ -15,28 +15,27 @@ const props = defineProps({
         },
     },
 });
+const { navRoute } = toRefs(props);
 const menu = ref(false);
 </script>
 
 <template>
     <v-btn
-        v-if="
-            !props.navRoute?.children || props.navRoute?.children?.length == 0
-        "
+        v-if="!navRoute?.children || navRoute?.children?.length == 0"
         class="text-none ml-4"
-        :to="props.navRoute.to"
+        :to="navRoute.to"
     >
         <template #append>
-            <v-icon :icon="props.navRoute.icon" />
+            <v-icon :icon="navRoute.icon" />
         </template>
 
-        {{ props.navRoute.text }}
+        {{ navRoute.text }}
     </v-btn>
 
     <v-menu v-else v-model="menu" open-on-hover>
         <template #activator="{ isActive, props: propsSlot }">
             <v-btn class="text-none ml-4" v-bind="propsSlot">
-                {{ props.navRoute.text }}
+                {{ navRoute.text }}
 
                 <template #append>
                     <v-icon
@@ -51,7 +50,7 @@ const menu = ref(false);
 
         <v-list density="compact">
             <v-list-item
-                v-for="(childRoute, index) in props.navRoute.children"
+                v-for="(childRoute, index) in navRoute.children"
                 :key="index"
                 link
                 :to="childRoute.to"

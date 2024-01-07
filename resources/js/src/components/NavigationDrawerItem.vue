@@ -1,4 +1,5 @@
 <script setup>
+import { toRefs } from "vue";
 const props = defineProps({
     navRoute: {
         type: Object,
@@ -13,38 +14,37 @@ const props = defineProps({
         },
     },
 });
+const { navRoute } = toRefs(props);
 </script>
 
 <template>
     <v-list-item
-        v-if="
-            !props.navRoute?.children || props.navRoute?.children?.length == 0
-        "
+        v-if="!navRoute?.children || navRoute?.children?.length == 0"
         link
-        :to="props.navRoute.to"
+        :to="navRoute.to"
     >
         <template #prepend>
-            <v-icon :icon="props.navRoute.icon" />
+            <v-icon :icon="navRoute.icon" />
         </template>
 
-        <v-list-item-title>{{ props.navRoute.text }}</v-list-item-title>
+        <v-list-item-title>{{ navRoute.text }}</v-list-item-title>
     </v-list-item>
 
     <v-list-group
         v-else
-        :value="`grupo-${props.navRoute.to.name}`"
-        :prepend-icon="props.navRoute.icon"
+        :value="`grupo-${navRoute.to.name}`"
+        :prepend-icon="navRoute.icon"
     >
         <template #activator="{ props: propsSlot }">
             <v-list-item v-bind="propsSlot">
                 <v-list-item-title>
-                    {{ props.navRoute.text }}
+                    {{ navRoute.text }}
                 </v-list-item-title>
             </v-list-item>
         </template>
 
         <v-list-item
-            v-for="(childRoute, index) in props.navRoute.children"
+            v-for="(childRoute, index) in navRoute.children"
             :key="index"
             link
             :to="childRoute.to"
