@@ -11,6 +11,16 @@
         @vite('resources/js/src/main.js')
 
         <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+            }
+
             .app-container-spinner {
                 position: absolute;
                 z-index: 9999;
@@ -26,7 +36,7 @@
                 width: 24px;
                 height: 24px;
                 border-radius: 50%;
-                border-left-color: var(--v-theme-primary);
+                border-left-color: #1867c0;
 
                 animation: spin 1s ease-in-out infinite;
             }
