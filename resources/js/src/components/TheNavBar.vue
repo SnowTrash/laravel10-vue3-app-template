@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
+import navigationRoutes from "../modules/pages/navigation-routes";
+import NavBarItem from "./NavBarItem.vue";
 
 const { width } = useDisplay();
-const menu = ref(false);
 const estaAutenticado = ref(true);
 
 const autenticar = () => {
@@ -37,64 +38,11 @@ const cerrarSesion = () => {
         <v-spacer />
 
         <template v-if="width > 960">
-            <!-- v-if="!menuItem.children" -->
-            <v-btn class="text-none ml-4" :to="{ name: 'inicio' }">
-                <template #append>
-                    <v-icon icon="mdi-home" />
-                </template>
-
-                Inicio
-            </v-btn>
-
-            <v-btn class="text-none ml-4" :to="{ name: 'nosotros' }">
-                <template #append>
-                    <v-icon icon="mdi-account-group" />
-                </template>
-
-                Nosotros
-            </v-btn>
-
-            <v-menu v-model="menu" open-on-hover>
-                <template #activator="{ isActive, props }">
-                    <v-btn class="text-none ml-4" v-bind="props">
-                        Items
-
-                        <template #append>
-                            <v-icon
-                                class="menu-icon"
-                                :class="{ 'menu-icon--rotate': isActive }"
-                            >
-                                mdi-chevron-down
-                            </v-icon>
-                        </template>
-                    </v-btn>
-                </template>
-
-                <v-list density="compact">
-                    <v-list-item
-                        v-for="(item, index) in [
-                            {
-                                text: 'Item 1',
-                                icon: 'mdi-alpha-a-circle',
-                            },
-                            {
-                                text: 'Item 2',
-                                icon: 'mdi-alpha-b-circle',
-                            },
-                        ]"
-                        :key="index"
-                        link
-                    >
-                        <template #append>
-                            <v-icon :icon="item.icon" />
-                        </template>
-
-                        <v-list-item-title>
-                            {{ item.text }}
-                        </v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu>
+            <NavBarItem
+                v-for="navRoute in navigationRoutes"
+                :key="navRoute.to.name"
+                :nav-route="navRoute"
+            />
 
             <v-divider class="mx-2" vertical />
 
