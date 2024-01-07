@@ -17,7 +17,7 @@ const { drawer } = storeToRefs(theNavigationDrawer);
 
             <NavigationDrawerItem
                 v-for="navRoute in navigationRoutes"
-                :key="navRoute.name"
+                :key="navRoute.to.name"
                 :nav-route="navRoute"
             />
         </v-list>

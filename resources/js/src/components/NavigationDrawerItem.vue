@@ -4,7 +4,12 @@ const props = defineProps({
         type: Object,
         required: true,
         validator: (value) => {
-            return "name" in value && "text" in value && "icon" in value;
+            return (
+                "to" in value &&
+                "text" in value &&
+                "icon" in value &&
+                "name" in value.to
+            );
         },
     },
 });
@@ -16,7 +21,7 @@ const props = defineProps({
             !props.navRoute?.children || props.navRoute?.children?.length == 0
         "
         link
-        :to="{ name: props.navRoute.name }"
+        :to="props.navRoute.to"
     >
         <template #prepend>
             <v-icon :icon="props.navRoute.icon" />
@@ -27,7 +32,7 @@ const props = defineProps({
 
     <v-list-group
         v-else
-        :value="`grupo-${props.navRoute.name}`"
+        :value="`grupo-${props.navRoute.to.name}`"
         :prepend-icon="props.navRoute.icon"
     >
         <template #activator="{ props: propsSlot }">
@@ -39,10 +44,10 @@ const props = defineProps({
         </template>
 
         <v-list-item
-            v-for="childRoute in props.navRoute.children"
-            :key="childRoute.name"
+            v-for="(childRoute, index) in props.navRoute.children"
+            :key="index"
             link
-            :to="{ name: childRoute.name }"
+            :to="childRoute.to"
         >
             <template #prepend>
                 <v-icon :icon="childRoute.icon" />
