@@ -1,23 +1,11 @@
+import rutasInicio from "@/modules/pages/inicio/routes.js";
+import rutasNosotros from "@/modules/pages/nosotros/routes.js";
 import rutasDashboard from "@/modules/admin/dashboard/routes.js";
 import rutasInformacion from "@/modules/admin/informacion/routes.js";
 
 const routes = [
-    {
-        path: "/",
-        name: "inicio",
-        component: () => import("@/views/InicioVista.vue"),
-        meta: {
-            layout: "page-layout",
-        },
-    },
-    {
-        path: "/nosotros",
-        name: "nosotros",
-        component: () => import("@/views/NosotrosVista.vue"),
-        meta: {
-            layout: "page-layout",
-        },
-    },
+    ...rutasInicio,
+    ...rutasNosotros,
     ...rutasDashboard,
     ...rutasInformacion,
     {
