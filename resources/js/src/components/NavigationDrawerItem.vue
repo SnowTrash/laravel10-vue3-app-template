@@ -1,18 +1,9 @@
 <script setup>
 import { toRefs } from "vue";
+import { navRouteProp } from "@/utils/props";
+
 const props = defineProps({
-    navRoute: {
-        type: Object,
-        required: true,
-        validator: (value) => {
-            return (
-                "to" in value &&
-                "text" in value &&
-                "icon" in value &&
-                "name" in value.to
-            );
-        },
-    },
+    navRoute: navRouteProp,
 });
 const { navRoute } = toRefs(props);
 </script>
