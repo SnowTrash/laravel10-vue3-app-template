@@ -5,6 +5,7 @@ const routes = [
         component: () => import("./views/AutorVista.vue"),
         meta: {
             layout: "admin-layout",
+            requiresAuth: true,
         },
     },
     {
@@ -13,6 +14,7 @@ const routes = [
         component: () => import("./views/TecnologiasVista.vue"),
         meta: {
             layout: "admin-layout",
+            requiresAuth: true,
         },
     },
 ];

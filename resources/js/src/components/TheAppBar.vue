@@ -1,8 +1,14 @@
 <script setup>
 import { useTheNavigationDrawerStore } from "@/stores/the-navigation-drawer";
+import { useLogoutStore } from "@/stores/logout";
+import { storeToRefs } from "pinia";
 
 const theNavigationDrawer = useTheNavigationDrawerStore();
+const logoutStore = useLogoutStore();
+
 const { toggle } = theNavigationDrawer;
+const { authLogout } = logoutStore;
+const { userGetter } = storeToRefs(logoutStore);
 </script>
 
 <template>
@@ -39,7 +45,7 @@ const { toggle } = theNavigationDrawer;
                     <v-list-item-title>Cambiar tema</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item link>
+                <v-list-item v-if="userGetter" link @click="authLogout">
                     <v-list-item-title>Cerrar sesión</v-list-item-title>
                 </v-list-item>
             </v-list>

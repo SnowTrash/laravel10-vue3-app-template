@@ -1,19 +1,15 @@
 <script setup>
-import { ref } from "vue";
 import { useDisplay } from "vuetify";
 import navigationRoutes from "../modules/pages/navigation-routes";
 import NavBarItem from "./NavBarItem.vue";
+import { useLogoutStore } from "@/stores/logout";
+import { storeToRefs } from "pinia";
 
 const { width } = useDisplay();
-const estaAutenticado = ref(true);
+const logoutStore = useLogoutStore();
 
-const autenticar = () => {
-    estaAutenticado.value = true;
-};
-
-const cerrarSesion = () => {
-    estaAutenticado.value = false;
-};
+const { authLogout } = logoutStore;
+const { userGetter, loading } = storeToRefs(logoutStore);
 </script>
 
 <template>
@@ -47,7 +43,7 @@ const cerrarSesion = () => {
             <v-divider class="mx-2" vertical />
 
             <v-btn
-                v-if="estaAutenticado"
+                v-if="userGetter"
                 class="text-none ml-4"
                 :to="{ name: 'admin.dashboard' }"
             >
@@ -59,9 +55,9 @@ const cerrarSesion = () => {
             </v-btn>
 
             <v-btn
-                v-if="!estaAutenticado"
+                v-if="!userGetter"
                 class="text-none ml-4"
-                @click="autenticar"
+                :to="{ name: 'auth.login' }"
             >
                 <template #append>
                     <v-icon icon="mdi-login" />
@@ -70,7 +66,12 @@ const cerrarSesion = () => {
                 Iniciar Sesión
             </v-btn>
 
-            <v-btn v-else class="text-none ml-4" @click="cerrarSesion">
+            <v-btn
+                v-else
+                class="text-none ml-4"
+                :loading="loading"
+                @click="authLogout"
+            >
                 <template #append>
                     <v-icon icon="mdi-logout" />
                 </template>

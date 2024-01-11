@@ -5,6 +5,7 @@ const routes = [
         component: () => import("./views/DashboardVista.vue"),
         meta: {
             layout: "admin-layout",
+            requiresAuth: true,
         },
     },
 ];
