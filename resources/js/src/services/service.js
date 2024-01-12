@@ -5,7 +5,12 @@ import {
     contentType,
     timeout,
     xRequestedWith,
+    errorNetworkCode,
+    pageExpiredCode,
+    unauthorizedCode,
 } from "@/utils/constants";
+import { useAuthStore } from "@/stores/auth";
+import { useToast } from "vue-toastification";
 
 const service = axios.create({
     baseURL,
@@ -19,21 +24,11 @@ const service = axios.create({
     },
 });
 
-import { useAuthStore } from "@/stores/auth";
-import { storeToRefs } from "pinia";
-import {
-    errorNetworkCode,
-    pageExpiredCode,
-    unauthorizedCode,
-} from "@/utils/constants";
-import { useToast } from "vue-toastification";
-
 service.interceptors.response.use(
     (response) => response,
     async (error) => {
         const authStore = useAuthStore();
         const { setUser } = authStore;
-        const { userGetter } = storeToRefs(authStore);
         const toast = useToast();
 
         if (error.code === errorNetworkCode) {
@@ -46,9 +41,7 @@ service.interceptors.response.use(
         ) {
             toast.error(error.response.data.message);
 
-            if (userGetter.value) {
-                setUser(null);
-            }
+            setUser(null);
         }
 
         return Promise.reject(error);
