@@ -1,7 +1,12 @@
 import service from "./service";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import { pageExpiredCode, unauthorizedCode } from "@/utils/constants";
+import {
+    errorNetworkCode,
+    pageExpiredCode,
+    unauthorizedCode,
+} from "@/utils/constants";
+import { useToast } from "vue-toastification";
 
 service.interceptors.response.use(
     (response) => response,
@@ -9,15 +14,21 @@ service.interceptors.response.use(
         const authStore = useAuthStore();
         const { setUser } = authStore;
         const { userGetter } = storeToRefs(authStore);
+        const toast = useToast();
+
+        if (error.code === errorNetworkCode) {
+            toast.error(error.message);
+        }
 
         if (
             error.response &&
-            [unauthorizedCode, pageExpiredCode].includes(
-                error.response.status,
-            ) &&
-            userGetter.value
+            [unauthorizedCode, pageExpiredCode].includes(error.response.status)
         ) {
-            setUser(null);
+            toast.error(error.response.data.message);
+
+            if (userGetter.value) {
+                setUser(null);
+            }
         }
 
         return Promise.reject(error);
