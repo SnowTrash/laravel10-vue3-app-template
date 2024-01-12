@@ -39,7 +39,9 @@ service.interceptors.response.use(
             error.response &&
             [unauthorizedCode, pageExpiredCode].includes(error.response.status)
         ) {
-            toast.error(error.response.data.message);
+            if (error.config.url !== "/user") {
+                toast.error(error.response.data.message);
+            }
 
             setUser(null);
         }
