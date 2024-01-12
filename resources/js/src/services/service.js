@@ -1,13 +1,21 @@
 import axios from "axios";
+import {
+    accept,
+    baseURL,
+    contentType,
+    timeout,
+    xRequestedWith,
+} from "@/utils/constants";
 
 const service = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL,
+    timeout,
     withCredentials: true,
     withXSRFToken: true,
     headers: {
-        "X-Requested-With": "XMLHttpRequest",
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        "X-Requested-With": xRequestedWith,
+        Accept: accept,
+        "Content-Type": contentType,
     },
 });
 

@@ -1,6 +1,7 @@
 import service from "./service";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import { pageExpiredCode, unauthorizedCode } from "@/utils/constants";
 
 service.interceptors.response.use(
     (response) => response,
@@ -11,7 +12,9 @@ service.interceptors.response.use(
 
         if (
             error.response &&
-            error.response.status === 401 &&
+            [unauthorizedCode, pageExpiredCode].includes(
+                error.response.status,
+            ) &&
             userGetter.value
         ) {
             setUser(null);
