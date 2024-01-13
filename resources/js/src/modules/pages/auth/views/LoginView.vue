@@ -68,6 +68,19 @@ const submitLogin = async () => {
                         <v-btn type="submit" color="primary" :loading="loading">
                             Login
                         </v-btn>
+
+                        <v-divider class="my-4" />
+
+                        <v-responsive class="text-center">
+                            <v-btn
+                                color="primary"
+                                variant="text"
+                                size="small"
+                                :to="{ name: 'inicio' }"
+                            >
+                                Ir a la página principal
+                            </v-btn>
+                        </v-responsive>
                     </v-form>
                 </v-card-text>
             </v-card>
