@@ -2,19 +2,33 @@
 import { reactive, ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
 
 const authStore = useAuthStore();
 const router = useRouter();
 
 const showPassword = ref(false);
 const form = reactive({
-    email: "luisfernandosalgadomiguez@gmail.com",
-    password: "Password123$",
+    email: "",
+    password: "",
 });
 const { login } = authStore;
 const loading = ref(false);
+const rules = {
+    email: { required, email },
+    password: { required },
+};
+
+const v$ = useVuelidate(rules, form, { $autoDirty: true, $lazy: true });
 
 const submitLogin = async () => {
+    const isValid = await v$.value.$validate();
+
+    if (!isValid) {
+        return;
+    }
+
     loading.value = true;
 
     try {
@@ -44,16 +58,21 @@ const submitLogin = async () => {
                         @submit.prevent="submitLogin"
                     >
                         <v-text-field
-                            v-model="form.email"
+                            v-model="v$.email.$model"
+                            class="mb-2"
                             label="Email"
                             name="email"
                             type="email"
                             required
                             clearable
+                            :error-messages="
+                                v$.email.$errors.map((error) => error.$message)
+                            "
                         />
 
                         <v-text-field
-                            v-model="form.password"
+                            v-model="v$.password.$model"
+                            class="mb-2"
                             label="Password"
                             name="password"
                             :type="showPassword ? 'text' : 'password'"
@@ -62,6 +81,11 @@ const submitLogin = async () => {
                                 showPassword ? 'mdi-eye' : 'mdi-eye-off'
                             "
                             clearable
+                            :error-messages="
+                                v$.password.$errors.map(
+                                    (error) => error.$message,
+                                )
+                            "
                             @click:append-inner="showPassword = !showPassword"
                         />
 
