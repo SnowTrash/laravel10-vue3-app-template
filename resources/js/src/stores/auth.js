@@ -6,15 +6,29 @@ export const useAuthStore = defineStore("auth", () => {
     const user = ref(null);
 
     const login = async (credentials) => {
-        return await authService.login(credentials).then(async () => {
+        try {
+            await authService.login(credentials);
+
             return await getUser();
-        });
+        } catch (error) {
+            console.log(error);
+
+            throw error;
+        }
     };
 
     const logout = async () => {
-        return await authService.logout().then(() => {
+        try {
+            const response = await authService.logout();
+
             setUser(null);
-        });
+
+            return response;
+        } catch (error) {
+            console.log(error);
+
+            throw error;
+        }
     };
 
     const getUser = async () => {
@@ -27,7 +41,9 @@ export const useAuthStore = defineStore("auth", () => {
         } catch (error) {
             console.log(error);
 
-            return error;
+            setUser(null);
+
+            throw error;
         }
     };
 

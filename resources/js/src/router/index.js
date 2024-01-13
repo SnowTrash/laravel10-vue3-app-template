@@ -25,12 +25,16 @@ router.beforeEach(async (to, from, next) => {
         to.name === "auth.login" ? { name: "inicio" } : undefined;
 
     if (!userGetter.value) {
-        await getUser();
+        try {
+            await getUser();
 
-        if (!userGetter.value) {
+            if (!userGetter.value) {
+                next(reqAuth ? { name: "auth.login" } : undefined);
+            } else {
+                next(redirectTo);
+            }
+        } catch (error) {
             next(reqAuth ? { name: "auth.login" } : undefined);
-        } else {
-            next(redirectTo);
         }
     } else {
         next(redirectTo);

@@ -33,17 +33,21 @@ service.interceptors.response.use(
 
         if (error.code === errorNetworkCode) {
             toast.error(error.message);
-        }
-
-        if (
+        } else if (
             error.response &&
             [unauthorizedCode, pageExpiredCode].includes(error.response.status)
         ) {
             if (error.config.url !== "/user") {
+                console.log(error.response.data.message);
+
                 toast.error(error.response.data.message);
             }
 
             setUser(null);
+        } else {
+            console.log(error);
+
+            toast.error("Ocurrió un error inesperado.");
         }
 
         return Promise.reject(error);
