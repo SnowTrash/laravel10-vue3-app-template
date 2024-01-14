@@ -8,9 +8,11 @@ import {
     errorNetworkCode,
     pageExpiredCode,
     unauthorizedCode,
+    unprocessableEntityCode,
 } from "@/utils/constants";
 import { useAuthStore } from "@/stores/auth";
 import { useToast } from "vue-toastification";
+import ErrorsList from "@/components/ErrorsList.vue";
 
 const service = axios.create({
     baseURL,
@@ -44,6 +46,24 @@ service.interceptors.response.use(
             }
 
             setUser(null);
+        } else if (
+            error.response &&
+            error.response.status === unprocessableEntityCode
+        ) {
+            const { data } = error.response;
+
+            if (data.errors && Object.keys(data.errors).length > 0) {
+                const errors = Object.values(data.errors).flat();
+
+                toast.error({
+                    component: ErrorsList,
+                    props: {
+                        errors,
+                    },
+                });
+            } else {
+                toast.error(data.message);
+            }
         } else {
             console.log(error);
 
