@@ -17,10 +17,16 @@ const { errors } = toRefs(props);
             Please correct the following errors:
         </span>
 
-        <ul>
+        <ul class="list-unstyled">
             <li v-for="error in errors" :key="error">
                 {{ error }}
             </li>
         </ul>
     </div>
 </template>
+
+<style scoped>
+.list-unstyled {
+    list-style: none;
+}
+</style>
