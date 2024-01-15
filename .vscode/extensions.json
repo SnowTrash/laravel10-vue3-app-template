@@ -4,6 +4,7 @@
         "dbaeumer.vscode-eslint",
         "vue.volar",
         "xdebug.php-pack",
-        "wongjn.php-sniffer"
+        "wongjn.php-sniffer",
+        "bmewburn.vscode-intelephense-client"
     ]
 }
