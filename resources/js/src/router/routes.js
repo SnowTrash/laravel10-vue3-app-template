@@ -4,6 +4,7 @@ import rutasItems from "@/modules/pages/items/routes.js";
 import rutasDashboard from "@/modules/admin/dashboard/routes.js";
 import rutasInformacion from "@/modules/admin/informacion/routes.js";
 import rutasAuth from "@/modules/pages/auth/routes.js";
+import rutasScenes from "@/modules/pages/scenes/routes.js";
 
 const routes = [
     ...rutasInicio,
@@ -12,6 +13,7 @@ const routes = [
     ...rutasDashboard,
     ...rutasInformacion,
     ...rutasAuth,
+    ...rutasScenes,
     {
         path: "/:pathMatch(.*)*",
         name: "not-found",

@@ -26,6 +26,11 @@ const navigationRoutes = [
             },
         ],
     },
+    {
+        to: { name: "scenes" },
+        text: "Teathre",
+        icon: "mdi-alpha-b-circle",
+    },
 ];
 
 export default navigationRoutes;
