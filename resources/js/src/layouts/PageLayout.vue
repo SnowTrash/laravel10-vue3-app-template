@@ -5,7 +5,6 @@ import TheNavBar from "../components/TheNavBar.vue";
 <template>
     <v-app>
         <TheNavBar />
-
         <v-layout>
             <v-main>
                 <v-container fluid>

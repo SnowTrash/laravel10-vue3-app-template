@@ -42,4 +42,8 @@ const layout = computed(() => {
 .fade-leave-to {
     opacity: 0;
 }
+
+#theatrejs-studio-root {
+    z-index: 6200;
+}
 </style>
